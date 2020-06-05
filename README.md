@@ -21,3 +21,11 @@
 # RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 2)
 
 ### SEE FOR REFFERENCE: https://docs.docker.com/engine/examples/postgresql_service/
+
+1. Run docker-compose to up postgres and redis:
+
+    `$ sudo docker-compose -f docker-compose.local.yml up --build`
+    
+2. Connect to postgresql container to check if it works:
+
+    `$ psql -h localhost -p 5432 -d docker -U docker --password`
