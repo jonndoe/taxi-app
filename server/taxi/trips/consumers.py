@@ -20,6 +20,20 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
     async def create_trip(self, message):
         data = message.get('data')
         trip = await self._create_trip(data)
+        trip_data = NestedTripSerializer(trip).data
+
+        # Send rider requests to all drivers.
+        await self.channel_layer.group_send(group='drivers', message={
+            'type': 'echo.message',
+            'data': trip_data
+        })
+
+        await self.send_json({
+            'type': 'echo.message',
+            'data': trip_data,
+        })
+
+
         await self.send_json({
             'type': 'echo.message',
             'data': NestedTripSerializer(trip).data,
