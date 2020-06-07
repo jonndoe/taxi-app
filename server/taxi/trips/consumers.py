@@ -7,13 +7,16 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
     groups = ['test']
 
     async def connect(self):
+        user = self.scope['user']
+        if user.is_anonymous:
+            await self.close()
+        else:
+            await self.channel_layer.group_add(
+                group='test',
+                channel=self.channel_name
+            )
 
-        await self.channel_layer.group_add(
-            group='test',
-            channel=self.channel_name
-        )
-
-        await self.accept()
+            await self.accept()
 
 
     async def echo_message(self, message):
