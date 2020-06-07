@@ -1,4 +1,3 @@
-
 from urllib.parse import parse_qs
 
 from django.contrib.auth import get_user_model
@@ -17,24 +16,23 @@ class TokenAuthMiddleware:
 
     def __call__(self, scope):
         close_old_connections()
-        query_string = parse_qs(scope['query_string'].decode())
-        token = query_string.get('token')
+        query_string = parse_qs(scope["query_string"].decode())
+        token = query_string.get("token")
         if not token:
-            scope['user'] = AnonymousUser()
+            scope["user"] = AnonymousUser()
             return self.inner(scope)
         try:
             access_token = AccessToken(token[0])
-            user = User.objects.get(id=access_token['id'])
+            user = User.objects.get(id=access_token["id"])
         except Exception as exception:
-            scope['user'] = AnonymousUser()
+            scope["user"] = AnonymousUser()
             return self.inner(scope)
         if not user.is_active:
-            scope['user'] = AnonymousUser()
+            scope["user"] = AnonymousUser()
             return self.inner(scope)
-        scope['user'] = user
+        scope["user"] = user
         return self.inner(scope)
 
 
 def TokenAuthMiddlewareStack(inner):
     return TokenAuthMiddleware(AuthMiddlewareStack(inner))
-
