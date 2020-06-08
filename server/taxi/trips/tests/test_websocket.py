@@ -306,13 +306,12 @@ class TestWebSocket:
 
         await communicator.disconnect()
 
-     # To Do:
-     #
-     # The rider cancels his request after a driver accepts it.
-     # The server alerts all other drivers in the driver pool that someone has accepted a request.
-     # The driver periodically broadcasts his location to the rider during a trip.
-     # The server only allows a rider to request one trip at a time.
-     # The rider can share his trip with another rider, who can join the trip and receive updates.
-     # The server only shares a trip request to drivers in a specific geographic location.
-     # If no drivers accept the request within a certain timespan, the server cancels the request and returns a message to the rider.
-
+    # To Do:
+    #
+    # The rider cancels his request after a driver accepts it.
+    # The server alerts all other drivers in the driver pool that someone has accepted a request.
+    # The driver periodically broadcasts his location to the rider during a trip.
+    # The server only allows a rider to request one trip at a time.
+    # The rider can share his trip with another rider, who can join the trip and receive updates.
+    # The server only shares a trip request to drivers in a specific geographic location.
+    # If no drivers accept the request within a certain timespan, the server cancels the request and returns a message to the rider.

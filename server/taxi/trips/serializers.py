@@ -8,6 +8,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import Trip
 from django.contrib.auth.models import Group
 
+
 class UserSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(write_only=True)
     password2 = serializers.CharField(write_only=True)
@@ -19,7 +20,7 @@ class UserSerializer(serializers.ModelSerializer):
         return data
 
     def create(self, validated_data):
-        group_data = validated_data.pop('group')
+        group_data = validated_data.pop("group")
         group, _ = Group.objects.get_or_create(name=group_data)
         data = {
             key: value
@@ -42,6 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "group",
+            "photo",
         )
         read_only_fields = ("id",)
 
