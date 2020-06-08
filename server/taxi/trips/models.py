@@ -6,6 +6,7 @@ from django.db import models  # new
 from django.shortcuts import reverse  # new
 from django.conf import settings
 
+
 class User(AbstractUser):
     pass
 
@@ -29,19 +30,19 @@ class Trip(models.Model):  # new
     drop_off_address = models.CharField(max_length=255)
     status = models.CharField(max_length=20, choices=STATUSES, default=REQUESTED)
 
-    driver = models.ForeignKey( # new
+    driver = models.ForeignKey(  # new
         settings.AUTH_USER_MODEL,
         null=True,
         blank=True,
         on_delete=models.DO_NOTHING,
-        related_name='trips_as_driver'
+        related_name="trips_as_driver",
     )
-    rider = models.ForeignKey( # new
+    rider = models.ForeignKey(  # new
         settings.AUTH_USER_MODEL,
         null=True,
         blank=True,
         on_delete=models.DO_NOTHING,
-        related_name='trips_as_rider'
+        related_name="trips_as_rider",
     )
 
     def __str__(self):

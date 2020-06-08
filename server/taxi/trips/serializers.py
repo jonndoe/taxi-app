@@ -64,5 +64,5 @@ class TripSerializer(serializers.ModelSerializer):
 class NestedTripSerializer(serializers.ModelSerializer):
     class Meta:
         model = Trip
-        fields = '__all__'
+        fields = "__all__"
         depth = 1
