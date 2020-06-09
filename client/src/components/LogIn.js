@@ -1,10 +1,23 @@
 // src/components/LogIn.js
 
-import React from 'react';
-import { Breadcrumb, Card, Col, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Formik } from 'formik';
+import { Breadcrumb, Button, Card, Col, Form, Row } from 'react-bootstrap';
+import { Link, Redirect } from 'react-router-dom';
 
 function LogIn (props) {
+
+  // new
+  const [isSubmitted, setSubmitted] = useState(false);
+
+  // new
+  const onSubmit = (values, actions) => setSubmitted(true);
+
+  // new
+  if (isSubmitted) {
+    return <Redirect to='/' />;
+  }
+
   return (
     <Row>
       <Col lg={12}>
@@ -14,7 +27,42 @@ function LogIn (props) {
         </Breadcrumb>
         <Card>
           <Card.Header>Log in</Card.Header>
-          <Card.Body></Card.Body>
+          <Card.Body>
+            <Formik
+              initialValues={{
+                username: '',
+                password: ''
+              }}
+              onSubmit={onSubmit}
+            >
+              {({
+                handleChange,
+                handleSubmit,
+                values
+              }) => (
+                <Form noValidate onSubmit={handleSubmit}>
+                  <Form.Group controlId='username'>
+                    <Form.Label>Username:</Form.Label>
+                    <Form.Control
+                      name='username'
+                      onChange={handleChange}
+                      value={values.username}
+                    />
+                  </Form.Group>
+                  <Form.Group controlId='password'>
+                    <Form.Label>Password:</Form.Label>
+                    <Form.Control
+                      name='password'
+                      onChange={handleChange}
+                      type='password'
+                      value={values.password}
+                    />
+                  </Form.Group>
+                  <Button block type='submit' variant='primary'>Log in</Button>
+                </Form>
+              )}
+            </Formik>
+          </Card.Body>
           <p className='mt-3 text-center'>
             Don't have an account? <Link to='/sign-up'>Sign up!</Link>
           </p>
