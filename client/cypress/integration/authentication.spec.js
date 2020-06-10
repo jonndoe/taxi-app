@@ -18,7 +18,7 @@ describe('Authentication', function () {
     cy.get('input#password').type('pAssw0rd', { log: false });
     cy.get('select#group').select('driver');
     cy.fixture('images/photo.jpg').then(photo => {
-        cy.get('input#photo').upload({
+        cy.get('input#photo').attachFile({
           fileContent: photo,
           fileName: 'photo.jpg',
           mimeType: 'application/json'
