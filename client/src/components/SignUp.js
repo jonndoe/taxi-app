@@ -7,13 +7,38 @@ import {
 } from 'react-bootstrap'; // changed
 import { Link, Redirect } from 'react-router-dom';
 
+import axios from 'axios';
+
+
 function SignUp (props) {
 
   // new
   const [isSubmitted, setSubmitted] = useState(false);
 
-  // new
-  const onSubmit = (values, actions) => setSubmitted(true);
+  const onSubmit = async (values, actions) => {
+    const url = '/api/sign_up/';
+    const formData = new FormData();
+    formData.append('username', values.username);
+    formData.append('first_name', values.firstName);
+    formData.append('last_name', values.lastName);
+    formData.append('password1', values.password);
+    formData.append('password2', values.password);
+    formData.append('group', values.group);
+    formData.append('photo', values.photo);
+    try {
+      await axios.post(url, formData);
+      setSubmitted(true);
+    }
+    catch (response) {
+      const data = response.response.data;
+      for (const value in data) {
+        actions.setFieldError(value, data[value].join(' '));
+      }
+    }
+    finally {
+      actions.setSubmitting(false);
+    }
+  };
 
   // new
   if (isSubmitted) {
