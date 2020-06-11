@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Button, Container, Form, Navbar } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Route, Switch } from 'react-router-dom';
 
 import SignUp from './components/SignUp'; // new
 import LogIn from './components/LogIn';
@@ -61,7 +61,11 @@ function App () {
           <Route path='/sign-up' component={SignUp} />
           {/* changed */}
           <Route path='/log-in' render={() => (
-            <LogIn logIn={logIn} />
+            isLoggedIn ? (
+              <Redirect to='/' />
+            ) : (
+              <LogIn logIn={logIn} />
+            )
           )} />
         </Switch>
       </Container>
