@@ -10,12 +10,27 @@ import LogIn from './components/LogIn';
 
 import './App.css';
 
+import axios from 'axios';
+
 function App () {
 
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setLoggedIn] = useState(() => { // changed
+    return window.localStorage.getItem('taxi.auth') !== null;
+  });
 
-  // new
-  const logIn = (username, password) => setLoggedIn(true);
+  const logIn = async (username, password) => { // changed
+    const url = '/api/log_in/';
+    try {
+      const response = await axios.post(url, { username, password });
+      window.localStorage.setItem(
+        'taxi.auth', JSON.stringify(response.data)
+      );
+      setLoggedIn(true);
+    }
+    catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
