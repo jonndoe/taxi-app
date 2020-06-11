@@ -97,5 +97,16 @@ describe('Authentication', function () {
     cy.hash().should('eq', '#/log-in');
   });
 
+
+  it('Can log out.', function () {
+    logIn();
+    cy.get('button').contains('Log out').click().should(() => {
+      expect(window.localStorage.getItem('taxi.auth')).to.be.null;
+    });
+    cy.get('button').contains('Log out').should('not.exist');
+  });
+
+
+
 });
 

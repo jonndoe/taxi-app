@@ -34,6 +34,14 @@ function App () {
     }
   };
 
+
+  const logOut = () => {
+    window.localStorage.removeItem('taxi.auth');
+    setLoggedIn(false);
+  };
+
+
+
   return (
     <div>
       <Navbar bg='light' expand='lg' variant='light'>
@@ -42,11 +50,10 @@ function App () {
         </LinkContainer>
         <Navbar.Toggle />
         <Navbar.Collapse>
-          {/* new */}
           {
             isLoggedIn &&
             <Form inline className='ml-auto'>
-              <Button type='button'>Log out</Button>
+              <Button type='button' onClick={() => logOut()}>Log out</Button>
             </Form>
           }
         </Navbar.Collapse>
