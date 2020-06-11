@@ -58,7 +58,13 @@ function App () {
               <Link className='btn btn-primary' to='/log-in'>Log in</Link>
             </div>
           )} />
-          <Route path='/sign-up' component={SignUp} />
+          <Route path='/sign-up' render={() => (
+            isLoggedIn ? (
+              <Redirect to='/' />
+            ) : (
+              <SignUp />
+            )
+          )} />
           {/* changed */}
           <Route path='/log-in' render={() => (
             isLoggedIn ? (
