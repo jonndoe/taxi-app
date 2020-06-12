@@ -23,6 +23,9 @@ services:
   taxi-server:
     build:
       context: ./server
+    volumes:  # new
+      - media:/usr/src/app/media
+      - static:/usr/src/app/static
     command: daphne --bind 0.0.0.0 --port 8000 taxi.asgi:application
     #command: python taxi/manage.py runserver 0.0.0.0:8000
     container_name: taxi-server
@@ -46,6 +49,21 @@ services:
     # this is temporal fix, to be removed
     stdin_open: true
 
+  taxi-nginx:
+    build:
+      context: ./nginx
+    container_name: taxi-nginx
+    depends_on:
+      - taxi-server
+      - taxi-client
+    ports:
+      - 8080:80
+    restart: always
+    volumes:
+      - media:/usr/src/app/media
+      - static:/usr/src/app/static
 
 volumes:
   taxi-database:
+  media:
+  static:
