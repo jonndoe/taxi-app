@@ -1,25 +1,41 @@
-# this file is used to build containers locally on develop host.
-
-version: '2'
+version: '3.7'
 
 services:
-  postgres:
-      environment:
-          POSTGRES_DB: docker
-          POSTGRES_USER: docker
-          POSTGRES_PASSWORD: docker
-      restart: always
-      build:
-       context: ./server
-       dockerfile: Dockerfile.psql
-      volumes:
-        - $home/docker/volumes/postgres:/var/lib/postgresql/data
-      ports:
-        - "5432:5432"
+  taxi-redis:
+    container_name: taxi-redis
+    image: redis:5.0.7-alpine
 
-  redis:
-    image: redis:3.0
+  taxi-database:
+    container_name: taxi-database
+    environment:
+        POSTGRES_DB: docker
+        POSTGRES_USER: docker
+        POSTGRES_PASSWORD: docker
+    restart: always
+    build:
+     context: ./server
+     dockerfile: Dockerfile.psql
+    volumes:
+      - $home/docker/volumes/postgres:/var/lib/postgresql/data
     ports:
-      - "6379:6379"
+      - "5433:5432"
 
+  taxi-server:
+    build:
+      context: ./server
+    command: python taxi/manage.py runserver 0.0.0.0:8000
+    container_name: taxi-server
+    depends_on:
+      - taxi-redis
+      - taxi-database
+    environment:
+      - PGDATABASE=taxi
+      - PGUSER=taxi
+      - PGPASSWORD=taxi
+      - PGHOST=taxi-database
+      - REDIS_URL=redis://taxi-redis:6379/0
+    ports:
+      - 8001:8000
 
+volumes:
+  taxi-database:

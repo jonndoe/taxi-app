@@ -1,4 +1,4 @@
-# this file is used to build containers locally on develop host.
+# this file is used to build postges and redis containers locally on develop host.
 
 version: '2'
 
