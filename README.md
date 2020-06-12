@@ -43,7 +43,20 @@ NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file 
 - `~/taxi-app/client$ npx cypress open`
 
 # SOME NOTES:
-## RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 1)
+### To reset the database, start by running the following command in your terminal, while your Docker containers are running: 
+
+- `$ docker-compose exec taxi-database psql -U taxi -d test`
+
+### Then run the following command to delete the users and their related data:
+
+- `TRUNCATE trips_user CASCADE;`
+
+- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml exec taxi-server python taxi/manage.py createsuperuser`
+
+
+
+
+### RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 1)
 1. Install docker image postgres:11
 
 2. Start a docker container with that postgres image.
@@ -60,9 +73,9 @@ NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file 
 
 6. $ `python manage.py migrate`
 
-## RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 2)
+### RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 2)
 
-### SEE FOR REFFERENCE: https://docs.docker.com/engine/examples/postgresql_service/
+#### SEE FOR REFFERENCE: https://docs.docker.com/engine/examples/postgresql_service/
 
 1. Run docker-compose to up postgres and redis:
 
