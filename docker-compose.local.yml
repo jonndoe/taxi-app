@@ -23,7 +23,8 @@ services:
   taxi-server:
     build:
       context: ./server
-    command: python taxi/manage.py runserver 0.0.0.0:8000
+    command: daphne --bind 0.0.0.0 --port 8000 taxi.asgi:application
+    #command: python taxi/manage.py runserver 0.0.0.0:8000
     container_name: taxi-server
     depends_on:
       - taxi-redis
