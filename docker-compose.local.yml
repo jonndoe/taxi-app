@@ -10,7 +10,7 @@ services:
           POSTGRES_PASSWORD: docker
       restart: always
       build:
-       context: .
+       context: ./server
        dockerfile: Dockerfile.psql
       volumes:
         - $home/docker/volumes/postgres:/var/lib/postgresql/data
@@ -21,3 +21,5 @@ services:
     image: redis:3.0
     ports:
       - "6379:6379"
+
+

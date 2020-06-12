@@ -1,4 +1,18 @@
+# START PROJECT FOR DEVELOPMENT( only postgres and redis dockerized):
 
+- `~$ git clone https://github.com/jonndoe/taxi-app.git`
+
+- `~$ cd taxi-app`
+
+- `~/taxi-app$ sudo docker-compose -f docker-compose.postgres.redis.yml up`
+
+- `~/taxi-app/server$ python manage.py migrate`
+
+- `~/taxi-app/server$ python manage.py runserver`
+
+- `~/taxi-app/client$ npm start`
+
+- `~/taxi-app/client$ npx cypress open`
 
 
 # RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 1)
@@ -24,7 +38,7 @@
 
 1. Run docker-compose to up postgres and redis:
 
-    `$ sudo docker-compose -f docker-compose.local.yml up --build`
+    `$ sudo docker-compose -f docker-compose.postgres.redis.yml up --build`
     
 2. Connect to postgresql container to check if it works:
 

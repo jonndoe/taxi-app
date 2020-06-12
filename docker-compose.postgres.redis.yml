@@ -1,0 +1,23 @@
+# this file is used to build containers locally on develop host.
+
+version: '2'
+
+services:
+  postgres:
+      environment:
+          POSTGRES_DB: docker
+          POSTGRES_USER: docker
+          POSTGRES_PASSWORD: docker
+      restart: always
+      build:
+       context: ./server
+       dockerfile: Dockerfile.psql
+      volumes:
+        - $home/docker/volumes/postgres:/var/lib/postgresql/data
+      ports:
+        - "5432:5432"
+
+  redis:
+    image: redis:3.0
+    ports:
+      - "6379:6379"
