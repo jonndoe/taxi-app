@@ -28,12 +28,8 @@ services:
     depends_on:
       - taxi-redis
       - taxi-database
-    environment:
-      - PGDATABASE=taxi
-      - PGUSER=taxi
-      - PGPASSWORD=taxi
-      - PGHOST=taxi-database
-      - REDIS_URL=redis://taxi-redis:6379/0
+    env_file:
+      - ./server/dev.env
     ports:
       - 8001:8000
 
