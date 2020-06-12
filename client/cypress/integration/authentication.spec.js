@@ -7,15 +7,22 @@ const logIn = () => {
 
   // Capture HTTP requests.
   cy.server();
+
+  // this route to be used, but if it is, then file uploading gives error, and test sighUp fails
+  // so mock data is used yet.
+  //cy.route('POST', '**/api/log_in/**').as('logIn');
+
+  // this will return mock data as response.
   cy.route({
     method: 'POST',
-    url: '**/api/log_in/**',
+     url: '**/api/log_in/**',
     status: 200,
     response: {
       'access': 'ACCESS_TOKEN',
       'refresh': 'REFRESH_TOKEN'
     }
   }).as('logIn');
+
 
   // Log into the app.
   cy.visit('/#/log-in');
@@ -28,15 +35,16 @@ const logIn = () => {
 
 describe('Authentication', function () {
 
-  it('Can log in.', function () {
-    logIn();
-    cy.hash().should('eq', '#/');
-    cy.get('button').contains('Log out');
-  });
-
   it('Can sign up.', function () {
     // new
     cy.server();
+
+    // this is to be fixed, somehow file upload with cypress does not work
+    //cy.route('POST', '**/api/sign_up/**').as('signUp');
+
+
+
+    // this will return mock data as response.
     cy.route({
       method: 'POST',
       url: '**/api/sign_up/**',
@@ -50,6 +58,7 @@ describe('Authentication', function () {
         'photo': '/media/images/photo.jpg'
       }
     }).as('signUp');
+
 
     cy.visit('/#/sign-up');
     cy.get('input#username').type('gary.cole@example.com');
@@ -71,6 +80,14 @@ describe('Authentication', function () {
     cy.wait('@signUp'); // new
     cy.hash().should('eq', '#/log-in');
   });
+
+  it('Can log in.', function () {
+    logIn();
+    cy.hash().should('eq', '#/');
+    cy.get('button').contains('Log out');
+  });
+
+
 
   it('Cannot visit the login page when logged in.', function () {
     logIn();

@@ -1,6 +1,6 @@
 # START PROJECT FOR TESTING(FULLY DOCKERIZED):
 
-NOTE THAT client/cypress.json should point to dockerized server: `"baseUrl": "http://localhost:3001"`
+NOTE THAT client/cypress.json should point to dockerized client through dockerized nginx: `"baseUrl": "http://localhost:8080"`
 NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file for testing with cypress
 
 - `~$ git clone https://github.com/jonndoe/taxi-app.git`
@@ -25,7 +25,7 @@ NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file 
 
 # START PROJECT FOR DEVELOPMENT( with dockerized postgres and dockerized redis ):
 
-NOTE THAT client/cypress.json should point to NOT dockerized server: `"baseUrl": "http://localhost:3000"`
+NOTE THAT client/cypress.json should point to NOT dockerized client: `"baseUrl": "http://localhost:3000"`
 NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file for testing with cypress
 
 - `~$ git clone https://github.com/jonndoe/taxi-app.git`
