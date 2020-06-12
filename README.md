@@ -1,4 +1,32 @@
-# START PROJECT FOR DEVELOPMENT( only postgres and redis dockerized):
+# START PROJECT FOR TESTING(FULLY DOCKERIZED):
+
+NOTE THAT client/cypress.json should point to dockerized server: `"baseUrl": "http://localhost:3001"`
+NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file for testing with cypress
+
+- `~$ git clone https://github.com/jonndoe/taxi-app.git`
+
+- `~$ cd taxi-app`
+
+- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml up --build`
+
+- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml exec taxi-server python taxi/manage.py migrate`
+
+- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml exec taxi-server python taxi/manage.py test trips.tests`
+
+- `~/taxi-app$ cd client/`
+
+- `~/taxi-app/client$ npx cypress open`
+
+
+
+
+
+
+
+# START PROJECT FOR DEVELOPMENT( with dockerized postgres and dockerized redis ):
+
+NOTE THAT client/cypress.json should point to NOT dockerized server: `"baseUrl": "http://localhost:3000"`
+NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file for testing with cypress
 
 - `~$ git clone https://github.com/jonndoe/taxi-app.git`
 
@@ -14,8 +42,8 @@
 
 - `~/taxi-app/client$ npx cypress open`
 
-
-# RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 1)
+# SOME NOTES:
+## RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 1)
 1. Install docker image postgres:11
 
 2. Start a docker container with that postgres image.
@@ -32,7 +60,7 @@
 
 6. $ `python manage.py migrate`
 
-# RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 2)
+## RUNNING THE POSTGRES DATABASE LOCALLY ON DOCKER (EXAMPLE 2)
 
 ### SEE FOR REFFERENCE: https://docs.docker.com/engine/examples/postgresql_service/
 

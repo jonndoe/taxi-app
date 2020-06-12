@@ -16,7 +16,7 @@ services:
      context: ./server
      dockerfile: Dockerfile.psql
     volumes:
-      - $home/docker/volumes/postgres:/var/lib/postgresql/data
+      - taxi-database:/var/lib/postgresql/data
     ports:
       - "5433:5432"
 
@@ -29,9 +29,22 @@ services:
       - taxi-redis
       - taxi-database
     env_file:
-      - ./server/dev.env
+      - ./server/test.env
     ports:
       - 8001:8000
+
+  taxi-client:
+    build:
+      context: ./client
+    command: npm start
+    container_name: taxi-client
+    depends_on:
+      - taxi-server
+    ports:
+      - 3001:3000
+    # this is temporal fix, to be removed
+    stdin_open: true
+
 
 volumes:
   taxi-database:
