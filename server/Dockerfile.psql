@@ -33,7 +33,8 @@ RUN    /etc/init.d/postgresql start &&\
 
 RUN    /etc/init.d/postgresql start &&\
     psql --command "CREATE USER taxi WITH SUPERUSER CREATEDB CREATEROLE PASSWORD 'taxi';" &&\
-    createdb -O taxi taxi
+    createdb -O taxi taxi &&\
+    createdb -O taxi test
 
 # Adjust PostgreSQL configuration so that remote connections to the
 # database are possible.

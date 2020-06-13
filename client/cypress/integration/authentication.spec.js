@@ -9,19 +9,19 @@ const logIn = () => {
   cy.server();
 
   // this route to be used, but if it is, then file uploading gives error, and test sighUp fails
-  // so mock data is used yet.
-  //cy.route('POST', '**/api/log_in/**').as('logIn');
+  // so mock data is to be used to run tests without fail yet.
+  cy.route('POST', '**/api/log_in/**').as('logIn');
 
   // this will return mock data as response.
-  cy.route({
-    method: 'POST',
-     url: '**/api/log_in/**',
-    status: 200,
-    response: {
-      'access': 'ACCESS_TOKEN',
-      'refresh': 'REFRESH_TOKEN'
-    }
-  }).as('logIn');
+  //cy.route({
+  //  method: 'POST',
+  //   url: '**/api/log_in/**',
+  //  status: 200,
+  //  response: {
+  //    'access': 'ACCESS_TOKEN',
+  //    'refresh': 'REFRESH_TOKEN'
+  //  }
+  //}).as('logIn');
 
 
   // Log into the app.
@@ -39,25 +39,27 @@ describe('Authentication', function () {
     // new
     cy.server();
 
-    // this is to be fixed, somehow file upload with cypress does not work
-    //cy.route('POST', '**/api/sign_up/**').as('signUp');
+    // this is to be fixed, somehow file upload with cypress gives error.
+    // so signUp test fails.
+    cy.route('POST', '**/api/sign_up/**').as('signUp');
 
 
 
     // this will return mock data as response.
-    cy.route({
-      method: 'POST',
-      url: '**/api/sign_up/**',
-      status: 201,
-      response: {
-        'id': 1,
-        'username': 'gary.cole@example.com',
-        'first_name': 'Gary',
-        'last_name': 'Cole',
-        'group': 'driver',
-        'photo': '/media/images/photo.jpg'
-      }
-    }).as('signUp');
+    // if this is used, then signUP test passes.
+    //cy.route({
+    //  method: 'POST',
+    //  url: '**/api/sign_up/**',
+    //  status: 201,
+    //  response: {
+    //    'id': 1,
+    //    'username': 'gary.cole@example.com',
+    //    'first_name': 'Gary',
+    //    'last_name': 'Cole',
+    //    'group': 'driver',
+    //    'photo': '/media/images/photo.jpg'
+    //  }
+    //}).as('signUp');
 
 
     cy.visit('/#/sign-up');
