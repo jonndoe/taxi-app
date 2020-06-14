@@ -2,8 +2,9 @@
 
 [
   {
+    "id": 1,
     "username": "test.user2@example.com",
-    "password": "pAssw0rd",
+    "password": "pbkdf2_sha256$150000$rLMSeXJpCDdm$CcKRxDe+hbydFneraJGCGCt8FGdIEEjRmcdt+jhkDoA=",
     "first_name": "Test",
     "last_name": "User",
     "email": "test.user@example.com",
@@ -11,5 +12,19 @@
     "is_staff": false,
     "is_superuser": false,
     "is_active": true
+  },
+
+  {
+    "id": 2,
+    "username": "hugh.wells@example.com",
+    "password": "pbkdf2_sha256$150000$rLMSeXJpCDdm$CcKRxDe+hbydFneraJGCGCt8FGdIEEjRmcdt+jhkDoA=",
+    "first_name": "Hugh",
+    "last_name": "Wells",
+    "email": "hugh.wells@example.com",
+    "date_joined": "2019-12-31T00:00:00.000Z",
+    "is_staff": false,
+    "is_superuser": false,
+    "is_active": true
   }
+
 ]

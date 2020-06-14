@@ -14,8 +14,17 @@
       "password": "taxi",
       "database": "taxi",
       "port": "5433"
-    }
+    },
 
+    "driver": {
+      "username": "gary.cole@example.com",
+      "password": "pAssw0rd"
+    },
+
+    "rider": {
+      "username": "hugh.wells@example.com",
+      "password": "pAssw0rd"
+    }
   }
 }
 

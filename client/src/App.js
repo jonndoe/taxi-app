@@ -12,6 +12,9 @@ import './App.css';
 
 import axios from 'axios';
 
+import Driver from './components/Driver.js';
+import Rider from './components/Rider.js';
+
 function App () {
 
   const [isLoggedIn, setLoggedIn] = useState(() => { // changed
@@ -96,6 +99,14 @@ function App () {
               <LogIn logIn={logIn} />
             )
           )} />
+
+          <Route path='/driver' render={() => (
+            <Driver />
+          )} />
+          <Route path='/rider' render={() => (
+            <Rider />
+          )} />
+
         </Switch>
       </Container>
     </div>
