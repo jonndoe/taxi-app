@@ -33,7 +33,8 @@ services:
       - taxi-redis
       - taxi-database
     env_file:
-      - ./server/test.env
+      #- ./server/test.env
+      - ./server/dev.env
     ports:
       - 8001:8000
 

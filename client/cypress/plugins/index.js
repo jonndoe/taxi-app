@@ -13,6 +13,18 @@ module.exports = (on, config) => {
         await client.raw(`TRUNCATE ${table} RESTART IDENTITY CASCADE`);
       }
       return client.insert(rows, ['id']).into(table);
+    },
+
+
+    async tableSelect ({ table }) {
+      const client = await knex({
+        client: 'pg',
+        connection: config.env.database
+      });
+      return client.select().table(table);
     }
+
+
+
   });
 }

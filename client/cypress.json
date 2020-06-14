@@ -12,7 +12,7 @@
       "host": "localhost",
       "user": "taxi",
       "password": "taxi",
-      "database": "test",
+      "database": "taxi",
       "port": "5433"
     }
 

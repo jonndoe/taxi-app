@@ -9,15 +9,16 @@ NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file 
 
 - `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml up --build`
 
-- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml exec taxi-server python taxi/manage.py migrate`
+- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml exec taxi-server python manage.py migrate`
 
-- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml exec taxi-server python taxi/manage.py test trips.tests`
+- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml exec taxi-server python manage.py test trips.tests`
 
 - `~/taxi-app$ cd client/`
 
 - `~/taxi-app/client$ npx cypress open`
 
-
+check if db tables exists:
+- `~/taxi-app$ sudo docker-compose -f docker-compose.local.yml exec taxi-database psql -U taxi`
 
 
 
@@ -34,9 +35,9 @@ NOTE THAT taxi-server in docker-compose.local.yml should point to test.env file 
 
 - `~/taxi-app$ sudo docker-compose -f docker-compose.postgres.redis.yml up`
 
-- `~/taxi-app/server$ python manage.py migrate`
+- `~/taxi-app/server$ python taxi/manage.py migrate`
 
-- `~/taxi-app/server$ python manage.py runserver`
+- `~/taxi-app/server$ python taxi/manage.py runserver`
 
 - `~/taxi-app/client$ npm start`
 
