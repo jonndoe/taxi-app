@@ -1,0 +1,15 @@
+
+
+[
+  {
+    "username": "test.user2@example.com",
+    "password": "pAssw0rd",
+    "first_name": "Test",
+    "last_name": "User",
+    "email": "test.user@example.com",
+    "date_joined": "2019-12-31T00:00:00.000Z",
+    "is_staff": false,
+    "is_superuser": false,
+    "is_active": true
+  }
+]

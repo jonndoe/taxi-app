@@ -4,6 +4,18 @@ const knex = require('knex');
 
 module.exports = (on, config) => {
   on('task', {
+
+
+    async tableTruncate ({ table }) {
+      const client = await knex({
+        client: 'pg',
+        connection: config.env.database
+      });
+      return client.raw(`TRUNCATE ${table} RESTART IDENTITY CASCADE`);
+    },
+
+
+
     async tableInsert ({ table, rows, truncate }) {
       const client = await knex({
         client: 'pg',
